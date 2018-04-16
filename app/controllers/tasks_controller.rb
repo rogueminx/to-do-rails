@@ -23,7 +23,7 @@ class TasksController < ApplicationController
   def update
     @list = List.find(params[:list_id])
     @task = Task.find(params[:id])
-    if @task.update(tasks_params)
+    if @task.update!(tasks_params)
       redirect_to list_path(@task.list)
     else
       render :edit
@@ -38,6 +38,6 @@ class TasksController < ApplicationController
 
   private
     def tasks_params
-      params.require(:task).permit(:description)
+      params.require(:task).permit(:description, :completed)
     end
 end
